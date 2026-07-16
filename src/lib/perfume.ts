@@ -55,7 +55,13 @@ export const parseNotes = (s: string) =>
     .filter(Boolean)
     .map(x => x.charAt(0).toUpperCase() + x.slice(1));
 
-export const money = (v: number) => '$' + (v % 1 ? v.toFixed(2) : v);
+const lkrFormatter = new Intl.NumberFormat('en-LK', {
+  style: 'currency',
+  currency: 'LKR',
+  currencyDisplay: 'code',
+});
+
+export const money = (v: number) => lkrFormatter.format(v);
 
 export interface TodaysPick {
   perfume: Perfume;

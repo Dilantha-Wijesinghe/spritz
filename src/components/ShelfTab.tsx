@@ -1,5 +1,5 @@
 import { LOW_PCT } from '../config';
-import { capacity, emptyEstimate, isEmpty, isLow, percentLeft, remaining } from '../lib/perfume';
+import { capacity, isEmpty, isLow, percentLeft, remaining } from '../lib/perfume';
 import type { Perfume, Wear } from '../types';
 import BottleGlyph from './BottleGlyph';
 import Button from './Button';
@@ -22,7 +22,6 @@ export default function ShelfTab({ perfumes, wears, loaded, onOpen, onLog, onAdd
           const rem = remaining(p, wears);
           const cap = capacity(p);
           const pc = percentLeft(p, wears);
-          const est = emptyEstimate(p, wears);
           return (
             <Glass
               key={p.id}
@@ -45,7 +44,7 @@ export default function ShelfTab({ perfumes, wears, loaded, onOpen, onLog, onAdd
                     <div className="fill-level" style={{ width: `${pc}%`, background: pc <= LOW_PCT ? 'var(--color-accent)' : 'var(--color-accent-2-500)' }} />
                   </div>
                   <div className="muted" style={{ fontSize: 12, marginTop: 8 }}>
-                    {rem} of {cap} sprays left{est ? `, empty around ${est}` : ''}
+                    {rem} of {cap} sprays left
                   </div>
                 </div>
               </Button>
