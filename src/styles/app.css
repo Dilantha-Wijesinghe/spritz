@@ -2,11 +2,11 @@
 
 html, body { margin: 0; padding: 0; background: var(--color-bg); }
 :root {
-  --surface-fill: #e0e0e0;
-  --surface-fill-hover: #e5e5e5;
+  --surface-fill: #e7e1d6;
+  --surface-fill-hover: #ede7dc;
   --surface-border: transparent;
-  --neo-light: #ffffff;
-  --neo-dark: #bebebe;
+  --neo-light: #fffaf0;
+  --neo-dark: #c5beb2;
   --neo-raised-sm: -4px -4px 9px var(--neo-light), 4px 4px 9px var(--neo-dark);
   --neo-raised-md: -8px -8px 18px var(--neo-light), 8px 8px 18px var(--neo-dark);
   --neo-inset: inset 5px 5px 10px var(--neo-dark), inset -5px -5px 10px var(--neo-light);
@@ -24,12 +24,29 @@ input[type="range"] { accent-color: var(--color-action-500); }
 }
 
 .app {
+  position: relative;
+  isolation: isolate;
   min-height: 100dvh;
   color: var(--color-text);
   font-family: var(--font-body);
   display: flex;
   justify-content: center;
   background: var(--color-bg);
+}
+.app::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, rgb(73 85 62 / 14%) 1px, transparent 1.15px);
+  background-size: 14px 14px;
+  mask-image:
+    radial-gradient(circle at 92% 9%, #000 0%, transparent 34%),
+    radial-gradient(circle at 2% 78%, #000 0%, transparent 31%);
+  -webkit-mask-image:
+    radial-gradient(circle at 92% 9%, #000 0%, transparent 34%),
+    radial-gradient(circle at 2% 78%, #000 0%, transparent 31%);
 }
 .app::after {
   content: "";
@@ -86,7 +103,7 @@ button.glass-surface { cursor: pointer; }
   padding: 14px 22px calc(22px + env(safe-area-inset-bottom));
   text-align: left;
   background: var(--surface-fill);
-  box-shadow: -5px -5px 14px rgba(255, 255, 255, .72), 8px 10px 24px rgba(140, 140, 140, .48);
+  box-shadow: -5px -5px 14px rgb(255 250 240 / 72%), 8px 10px 24px rgb(133 125 113 / 44%);
 }
 
 .shelf-card { padding: 14px; gap: 12px; }
@@ -138,7 +155,7 @@ button.glass-surface { cursor: pointer; }
   animation: fade-in .16s ease;
 }
 .overlay-col { width: 100%; max-width: 430px; padding: 20px 18px 40px; }
-.scrim { position: fixed; inset: 0; z-index: 70; background: rgba(32, 30, 29, .48); animation: fade-in .16s ease; }
+.scrim { position: fixed; inset: 0; z-index: 70; background: rgb(36 33 30 / 48%); animation: fade-in .16s ease; }
 .nav-slot {
   position: fixed;
   bottom: max(12px, env(safe-area-inset-bottom));
@@ -238,7 +255,7 @@ button.glass-surface { cursor: pointer; }
   color: var(--color-neutral-100);
   background: var(--color-action-600);
   border-color: var(--color-action-700);
-  box-shadow: -4px -4px 9px var(--neo-light), 5px 5px 11px #a3aaa8;
+  box-shadow: -4px -4px 9px var(--neo-light), 5px 5px 11px #aaa69b;
 }
 .button-primary:not(:disabled):hover { background: var(--color-action-700); }
 .button-primary:not(:disabled):active { background: var(--color-action-700); box-shadow: inset 4px 4px 8px rgba(17, 51, 46, .46), inset -3px -3px 7px rgba(111, 176, 164, .28); }
@@ -342,6 +359,7 @@ textarea.inp { border-radius: var(--radius-md, 14px); resize: vertical; }
 }
 
 @media (prefers-contrast: more) {
+  .app::before { opacity: .35; }
   .app::after { opacity: .025; }
   .glass-surface,
   .native-button { border-color: var(--color-neutral-600); }
