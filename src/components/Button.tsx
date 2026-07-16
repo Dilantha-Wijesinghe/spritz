@@ -10,7 +10,9 @@ type ButtonVariant =
   | 'chip'
   | 'tab'
   | 'day'
-  | 'stepper';
+  | 'stepper'
+  | 'icon'
+  | 'card-action';
 type ButtonSize = 'sm' | 'md' | 'lg';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {

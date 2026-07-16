@@ -30,13 +30,13 @@ export function seed(): Perfume[] {
     {
       id: 'p1', name: 'Lion', brand: 'Rayhaan', conc: 'EDP', ml: 100, price: 0, fill: 1, hue: 0, photo: null,
       top: ['Bergamot', 'Pineapple', 'Blackcurrant'], heart: ['Birch', 'Patchouli', 'Jasmine'], base: ['Musk', 'Oakmoss', 'Vanilla'],
-      desc: 'Bold and smoky-fruity — bright pineapple over dark birch and moss. A statement scent for cooler days.',
+      desc: 'Bold and smoky-fruity, with bright pineapple over dark birch and moss. A statement scent for cooler days.',
       seasons: ['fall', 'winter'], added: Date.now(),
     },
     {
       id: 'p2', name: 'Ice Dive', brand: 'Adidas', conc: 'EDT', ml: 100, price: 0, fill: 1, hue: 1, photo: null,
       top: ['Kiwi', 'Mint', 'Bergamot'], heart: ['Anise', 'Geranium', 'Patchouli'], base: ['Sandalwood', 'Musk', 'Vanilla'],
-      desc: 'Cool aquatic freshness with icy mint and kiwi — made for hot days.',
+      desc: 'Cool aquatic freshness with icy mint and kiwi, made for hot days.',
       seasons: ['spring', 'summer'], added: Date.now(),
     },
   ];

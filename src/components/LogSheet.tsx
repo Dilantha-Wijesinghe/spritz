@@ -19,11 +19,11 @@ export default function LogSheet({ perfume, wears, sprays, date, onSprays, onDat
   return (
     <>
       <div className="scrim" onClick={onClose} />
-      <Glass as="div" variant="sheet" corner={24} className="sheet-slot" blurAmount={0.55} displacementScale={24} contentStyle={{ borderRadius: '24px 24px 0 0' }}>
+      <Glass as="div" variant="sheet" corner={24} className="sheet-slot" contentStyle={{ borderRadius: '24px 24px 0 0' }}>
         <div role="dialog" aria-label="Log a wear" style={{ width: '100%' }}>
           <div className="kicker" style={{ marginBottom: 4 }}>Log a wear</div>
           <div style={{ fontFamily: 'var(--font-heading)', fontSize: 20, marginBottom: 16 }}>
-            {perfume.name} — {perfume.brand || ''}
+            {perfume.name}{perfume.brand ? `, ${perfume.brand}` : ''}
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 20, marginBottom: 14 }}>

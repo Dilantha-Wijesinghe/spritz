@@ -27,7 +27,7 @@ export default function TodayTab({ perfumes, wears, onLog }: TodayTabProps) {
       return {
         id: p.id,
         text: rem <= 0
-          ? `${p.name} is empty — time for a new bottle.`
+          ? `${p.name} is empty. Time for a new bottle.`
           : `${p.name} is running low: ${rem} sprays (${percentLeft(p, wears)}%) left${est ? `, should last until ~${est}` : ''}.`,
       };
     });
@@ -43,7 +43,7 @@ export default function TodayTab({ perfumes, wears, onLog }: TodayTabProps) {
       <p className="muted" style={{ margin: '4px 0 18px', fontSize: 13 }}>{dateLabel}</p>
 
       {pick && (
-        <Glass as="div" variant="pick" corner={28} blurAmount={0.35} displacementScale={28} contentStyle={{ display: 'block', padding: 18, textAlign: 'left' }}>
+        <Glass as="div" variant="pick" corner={28} contentStyle={{ display: 'block', padding: 18, textAlign: 'left' }}>
           <div className="kicker" style={{ color: 'var(--color-accent-2-800)', marginBottom: 12 }}>Today’s pick</div>
           <div style={{ display: 'flex', gap: 14, alignItems: 'center' }}>
             <BottleGlyph fillPct={percentLeft(pick.perfume, wears)} hue={pick.perfume.hue} />
@@ -53,7 +53,7 @@ export default function TodayTab({ perfumes, wears, onLog }: TodayTabProps) {
             </div>
           </div>
           <p style={{ fontSize: 14, lineHeight: 1.5, margin: '14px 0', color: 'var(--color-accent-2-900)' }}>{pick.reason}</p>
-          <Button variant="primary" onClick={() => onLog(pick.perfume.id)} style={{ width: 170 }}>
+          <Button variant="primary" onClick={() => onLog(pick.perfume.id)}>
             Wear this today
           </Button>
         </Glass>
@@ -74,7 +74,7 @@ export default function TodayTab({ perfumes, wears, onLog }: TodayTabProps) {
         {recent.length > 0 ? (
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
             {recent.map(w => (
-              <Glass key={w.id} as="div" variant="row" corner={14} blurAmount={0.25} displacementScale={20} contentStyle={{ padding: '11px 14px', gap: 10, justifyContent: 'flex-start' }}>
+              <Glass key={w.id} as="div" variant="row" corner={14} contentStyle={{ padding: '11px 14px', gap: 10, justifyContent: 'flex-start' }}>
                 <span className="muted" style={{ fontSize: 12, width: 52, flex: 'none', textAlign: 'left' }}>{fmtDate(w.date)}</span>
                 <span style={{ fontSize: 14, flex: 1, minWidth: 0, textAlign: 'left' }}>{pname(w.pid)}</span>
                 <span className="muted" style={{ fontSize: 12 }}>{w.sprays} sprays</span>
@@ -82,7 +82,7 @@ export default function TodayTab({ perfumes, wears, onLog }: TodayTabProps) {
             ))}
           </div>
         ) : (
-          <div className="muted" style={{ fontSize: 13 }}>Nothing logged yet — hit Spritz on a bottle when you wear it.</div>
+          <div className="muted" style={{ fontSize: 13 }}>Nothing logged yet. Hit Spritz on a bottle when you wear it.</div>
         )}
       </div>
     </section>

@@ -29,33 +29,32 @@ export default function ShelfTab({ perfumes, wears, loaded, onOpen, onLog, onAdd
               as="div"
               variant="card"
               corner={28}
-              blurAmount={0.35}
-              displacementScale={28}
-              onClick={() => onOpen(p.id)}
-              contentClassName=""
-              contentStyle={{ padding: 16, display: 'flex', gap: 14, alignItems: 'center', cursor: 'pointer', justifyContent: 'flex-start', textAlign: 'left' }}
+              contentClassName="shelf-card"
             >
-              <BottleGlyph fillPct={pc} hue={p.hue} />
-              <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
-                  <span style={{ fontFamily: 'var(--font-heading)', fontSize: 17, lineHeight: 1.2 }}>{p.name}</span>
-                  <span className="badge badge-conc">{p.conc}</span>
-                  {isLow(p, wears) && <span className="badge badge-low">running low</span>}
-                  {isEmpty(p, wears) && <span className="badge badge-empty">empty</span>}
+              <Button variant="card-action" onClick={() => onOpen(p.id)} aria-label={`View details for ${p.name}`}>
+                <BottleGlyph fillPct={pc} hue={p.hue} />
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
+                    <span style={{ fontFamily: 'var(--font-heading)', fontSize: 17, lineHeight: 1.2 }}>{p.name}</span>
+                    <span className="badge badge-conc">{p.conc}</span>
+                    {isLow(p, wears) && <span className="badge badge-low">running low</span>}
+                    {isEmpty(p, wears) && <span className="badge badge-empty">empty</span>}
+                  </div>
+                  <div className="muted" style={{ fontSize: 13, marginTop: 4 }}>{p.brand || 'Brand unavailable'}</div>
+                  <div className="fill-track" style={{ marginTop: 12 }}>
+                    <div className="fill-level" style={{ width: `${pc}%`, background: pc <= LOW_PCT ? 'var(--color-accent)' : 'var(--color-accent-2-500)' }} />
+                  </div>
+                  <div className="muted" style={{ fontSize: 12, marginTop: 8 }}>
+                    {rem} of {cap} sprays left{est ? `, empty around ${est}` : ''}
+                  </div>
                 </div>
-                <div className="muted" style={{ fontSize: 13, marginTop: 2 }}>{p.brand || '—'}</div>
-                <div style={{ height: 8, background: 'var(--color-neutral-200)', borderRadius: 999, marginTop: 10, overflow: 'hidden' }}>
-                  <div style={{ height: '100%', width: `${pc}%`, background: pc <= LOW_PCT ? 'var(--color-accent)' : 'var(--color-accent-2-500)', borderRadius: 999, transition: 'width .6s ease' }} />
-                </div>
-                <div className="muted" style={{ fontSize: 12, marginTop: 6 }}>
-                  {rem} of {cap} sprays left{est ? ` · empty ~${est}` : ''}
-                </div>
-              </div>
+              </Button>
               <Button
-                variant="neo-secondary"
+                variant="secondary"
                 size="sm"
-                onClick={e => { e.stopPropagation(); onLog(p.id); }}
-                style={{ width: 76, flex: 'none' }}
+                onClick={() => onLog(p.id)}
+                aria-label={`Log a wear for ${p.name}`}
+                className="shelf-spritz"
               >
                 Spritz
               </Button>
@@ -69,8 +68,8 @@ export default function ShelfTab({ perfumes, wears, loaded, onOpen, onLog, onAdd
           <div style={{ fontSize: 14 }}>Add your first bottle below and start logging your sprays.</div>
         </div>
       )}
-      <Button variant="neo-primary" size="lg" block onClick={onAdd} style={{ marginTop: 16 }}>
-        + Add a perfume
+      <Button variant="primary" onClick={onAdd} className="shelf-add-fab" aria-label="Add a perfume" title="Add a perfume">
+        <span aria-hidden="true">+</span>
       </Button>
     </section>
   );

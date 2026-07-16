@@ -47,14 +47,12 @@ export default function HistoryTab({ perfumes, wears, calOff, daySel, onCalOff, 
   const dayEntries = daySel ? wears.filter(w => w.date === daySel) : [];
   const pname = (pid: string) => perfumes.find(x => x.id === pid)?.name ?? 'Unknown';
 
-  const arrowProps = { variant: 'chrome' as const, style: { width: 38 }, contentStyle: { height: 38, fontSize: 16 } };
-
   return (
     <section aria-label="History">
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 14 }}>
-        <Glass {...arrowProps} label="Previous month" onClick={() => { onCalOff(calOff - 1); onDaySel(null); }}>←</Glass>
+        <Button variant="icon" aria-label="Previous month" onClick={() => { onCalOff(calOff - 1); onDaySel(null); }}>←</Button>
         <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 20, fontWeight: 400, margin: 0 }}>{calLabel}</h2>
-        <Glass {...arrowProps} label="Next month" onClick={() => { onCalOff(calOff + 1); onDaySel(null); }}>→</Glass>
+        <Button variant="icon" aria-label="Next month" onClick={() => { onCalOff(calOff + 1); onDaySel(null); }}>→</Button>
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7,1fr)', gap: 4, marginBottom: 6 }}>
@@ -87,7 +85,7 @@ export default function HistoryTab({ perfumes, wears, calOff, daySel, onCalOff, 
           {dayEntries.length > 0 ? (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
               {dayEntries.map(w => (
-                <Glass key={w.id} as="div" variant="row" corner={14} blurAmount={0.25} displacementScale={20} contentStyle={{ padding: '11px 14px', gap: 10, justifyContent: 'flex-start' }}>
+                <Glass key={w.id} as="div" variant="row" corner={14} contentStyle={{ padding: '11px 14px', gap: 10, justifyContent: 'flex-start' }}>
                   <span style={{ fontSize: 14, flex: 1, minWidth: 0, textAlign: 'left' }}>{pname(w.pid)}</span>
                   <span className="muted" style={{ fontSize: 12 }}>{w.sprays} sprays</span>
                   <Button
