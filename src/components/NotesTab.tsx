@@ -72,8 +72,8 @@ export default function NotesTab({ perfumes, noteFilter, onFilter, onOpen }: Not
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
             {matches.map(({ p, layers }) => (
-              <Glass key={p.id} as="div" variant="row" corner={14} blurAmount={0.25} displacementScale={20} onClick={() => onOpen(p.id)} contentStyle={{ padding: '12px 14px', gap: 10, justifyContent: 'flex-start', cursor: 'pointer' }}>
-                <span style={{ fontSize: 14, flex: 1, minWidth: 0, textAlign: 'left' }}>{p.name} — {p.brand}</span>
+              <Glass key={p.id} variant="row" corner={14} label={`View details for ${p.name}`} onClick={() => onOpen(p.id)} contentStyle={{ padding: '12px 14px', gap: 10, justifyContent: 'flex-start' }}>
+                <span style={{ fontSize: 14, flex: 1, minWidth: 0, textAlign: 'left' }}>{p.name}, {p.brand || 'brand unavailable'}</span>
                 <span style={{ fontSize: 12, color: 'var(--color-accent-2-800)', background: 'var(--color-accent-2-100)', borderRadius: 999, padding: '2px 10px' }}>{layers}</span>
               </Glass>
             ))}

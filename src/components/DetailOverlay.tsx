@@ -25,9 +25,9 @@ export default function DetailOverlay({ perfume: p, wears, onClose, onWear, onEd
     ['Sprays left', `${rem} / ${capacity(p)}`],
     ['Bottle', `${pc}% full`],
     ['Times worn', String(worn.length)],
-    ['Cost per wear', p.price > 0 && worn.length ? money(p.price / worn.length) : '—'],
+    ['Cost per wear', p.price > 0 && worn.length ? money(p.price / worn.length) : 'Unavailable'],
     ['Last worn', lw ? fmtDate(lw) : 'never'],
-    ['Empty around', est ? `~${est}` : '—'],
+    ['Empty around', est ? `~${est}` : 'Unavailable'],
   ];
 
   const noteRows = ([['Top', p.top], ['Heart', p.heart], ['Base', p.base]] as Array<[string, string[]]>)
@@ -36,7 +36,7 @@ export default function DetailOverlay({ perfume: p, wears, onClose, onWear, onEd
   return (
     <div className="overlay" role="dialog" aria-label="Perfume detail">
       <div className="overlay-col">
-        <Glass variant="chrome" label="Back to shelf" onClick={onClose} style={{ width: 40, marginBottom: 18 }} contentStyle={{ height: 40, fontSize: 19 }}>
+        <Glass variant="chrome" label="Back to shelf" onClick={onClose} style={{ width: 44, height: 44, marginBottom: 18, fontSize: 19 }}>
           ←
         </Glass>
 
@@ -47,18 +47,18 @@ export default function DetailOverlay({ perfume: p, wears, onClose, onWear, onEd
           )}
           <div style={{ flex: 1, minWidth: 0 }}>
             <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 24, fontWeight: 400, margin: 0, lineHeight: 1.15 }}>{p.name}</h2>
-            <div className="muted" style={{ fontSize: 14, marginTop: 3 }}>{p.brand || '—'}</div>
+            <div className="muted" style={{ fontSize: 14, marginTop: 3 }}>{p.brand || 'Brand unavailable'}</div>
             <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginTop: 8 }}>
               <span className="badge badge-conc" style={{ padding: '3px 10px' }}>{p.conc}</span>
               <span className="badge badge-empty" style={{ padding: '3px 10px' }}>{p.ml} ml</span>
-              {p.seasons.length > 0 && <span className="badge badge-low" style={{ padding: '3px 10px' }}>{p.seasons.join(' · ')}</span>}
+              {p.seasons.length > 0 && <span className="badge badge-low" style={{ padding: '3px 10px' }}>{p.seasons.join(', ')}</span>}
             </div>
           </div>
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: 18 }}>
           {stats.map(([k, v]) => (
-            <Glass key={k} as="div" variant="row" corner={14} blurAmount={0.25} displacementScale={20} contentStyle={{ display: 'block', padding: '12px 14px', textAlign: 'left' }}>
+            <Glass key={k} as="div" variant="row" corner={14} contentStyle={{ display: 'block', padding: '12px 14px', textAlign: 'left' }}>
               <div className="kicker" style={{ letterSpacing: '.06em' }}>{k}</div>
               <div style={{ fontFamily: 'var(--font-heading)', fontSize: 18, marginTop: 3 }}>{v}</div>
             </Glass>
@@ -70,7 +70,7 @@ export default function DetailOverlay({ perfume: p, wears, onClose, onWear, onEd
             {noteRows.map(([layer, list]) => (
               <div key={layer} style={{ display: 'flex', gap: 10, alignItems: 'baseline' }}>
                 <span className="kicker" style={{ color: 'var(--color-accent-2-800)', letterSpacing: '.06em', width: 44, flex: 'none' }}>{layer}</span>
-                <span style={{ fontSize: 14, lineHeight: 1.5, color: 'var(--color-neutral-800)' }}>{list.join(' · ')}</span>
+                <span style={{ fontSize: 14, lineHeight: 1.5, color: 'var(--color-neutral-800)' }}>{list.join(', ')}</span>
               </div>
             ))}
           </div>

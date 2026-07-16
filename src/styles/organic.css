@@ -1,9 +1,22 @@
-/* Organic — design-system tokens and component classes. This file is the source of truth for the system's look; retune it here and see readme.md. */
-@import url('https://fonts.googleapis.com/css2?family=Caprasimo:wght@400&family=Figtree:wght@400;600;700&display=swap');
+/* Organic design-system tokens and component classes. */
+@font-face {
+  font-family: "Caprasimo";
+  src: url('/fonts/caprasimo/Caprasimo-Regular.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Figtree";
+  src: url('/fonts/figtree/Figtree-Variable.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 300 900;
+  font-display: swap;
+}
 
 :root {
-  --color-bg: #f5ead8;
-  --color-surface: #ebddc5;
+  --color-bg: #e0e0e0;
+  --color-surface: #e0e0e0;
   --color-text: #201e1d;
   --color-accent: #c67139;
   --color-accent-2: #7a8a5e;
@@ -20,15 +33,15 @@
 
   /* Tonal ramps — generated in OKLCH on one shared lightness scale, so the
      same step of any role matches the others in visual value. */
-  --color-neutral-100: #f9f4ed;
-  --color-neutral-200: #eee7db;
-  --color-neutral-300: #dcd3c4;
-  --color-neutral-400: #c0b6a5;
-  --color-neutral-500: #a19786;
-  --color-neutral-600: #82796a;
-  --color-neutral-700: #645c50;
-  --color-neutral-800: #474238;
-  --color-neutral-900: #2e2b25;
+  --color-neutral-100: #f2f2f2;
+  --color-neutral-200: #d0d0d0;
+  --color-neutral-300: #b8b8b8;
+  --color-neutral-400: #9f9f9f;
+  --color-neutral-500: #858585;
+  --color-neutral-600: #6d6d6d;
+  --color-neutral-700: #555555;
+  --color-neutral-800: #3d3d3d;
+  --color-neutral-900: #292929;
 
   --color-accent-100: #fff2eb;
   --color-accent-200: #ffe1d0;
@@ -110,7 +123,7 @@ figcaption {
 }
 .text-muted { color: color-mix(in srgb, var(--color-text) 55%, transparent); }
 :focus { outline: none; }
-:focus-visible { outline: 2px solid var(--color-action-500); outline-offset: 2px; }
+:focus-visible { outline: 3px solid var(--color-action-700); outline-offset: 3px; }
 ::selection { background: color-mix(in srgb, var(--color-accent) 30%, transparent); }
 
 /* — rules — */

@@ -78,6 +78,6 @@ export function todaysPick(perfumes: Perfume[], wears: Wear[]): TodaysPick | nul
   const lw = lastWorn(wears, pick.id);
   const reason =
     (seasonal.length ? `A ${season}-ready pick from your shelf` : 'The bottle that’s been waiting longest') +
-    (lw ? ` — last worn ${fmtDate(lw)}.` : ' — you haven’t logged it yet.');
+    (lw ? ` Last worn ${fmtDate(lw)}.` : ' You haven’t logged it yet.');
   return { perfume: pick, reason };
 }

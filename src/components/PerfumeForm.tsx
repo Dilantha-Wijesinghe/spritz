@@ -2,7 +2,6 @@ import { useReducer, useRef } from 'react';
 import type { ChangeEvent, MutableRefObject } from 'react';
 import type { Draft, Season } from '../types';
 import Button from './Button';
-import Glass from './Glass';
 
 interface PerfumeFormProps {
   draftRef: MutableRefObject<Draft>;
@@ -52,7 +51,7 @@ export default function PerfumeForm({ draftRef, editing, error, onSave, onClose 
       <div className="overlay-col">
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 18 }}>
           <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 24, fontWeight: 400, margin: 0 }}>{editing ? 'Edit perfume' : 'New perfume'}</h2>
-          <Glass variant="chrome" label="Close" onClick={onClose} style={{ width: 38 }} contentStyle={{ height: 38, fontSize: 15 }}>✕</Glass>
+          <Button variant="icon" aria-label="Close" onClick={onClose}>✕</Button>
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>

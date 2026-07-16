@@ -44,7 +44,7 @@ export default function TabBar({ tab, onSelect }: TabBarProps) {
   const activeIndex = TABS.findIndex(([id]) => id === tab);
 
   return (
-    <Glass as="div" variant="nav" corner={24} className="nav-slot" blurAmount={0.45} displacementScale={22} aberrationIntensity={1}>
+    <Glass as="div" variant="nav" corner={24} className="nav-slot">
       <span className="tab-indicator" aria-hidden="true" style={{ transform: `translateX(${activeIndex * 100}%)` }} />
       {TABS.map(([id, tabLabel]) => (
         <Button
