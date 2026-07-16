@@ -78,7 +78,7 @@ export default function DetailOverlay({ perfume: p, wears, onClose, onWear, onEd
 
         {p.desc && <p className="muted" style={{ fontSize: 14, lineHeight: 1.6, margin: '0 0 22px' }}>{p.desc}</p>}
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+        <div className="detail-actions" style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
           <Button variant="primary" size="lg" block onClick={onWear}>Log a wear</Button>
           <Button variant="secondary" size="lg" block onClick={onEdit}>Edit details</Button>
           <Button

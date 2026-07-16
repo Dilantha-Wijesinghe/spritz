@@ -1,6 +1,13 @@
 /* Spritz application chrome. Organic tokens live in organic.css. */
 
-html, body { margin: 0; padding: 0; background: var(--color-bg); }
+html, body, #root {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background: var(--color-bg);
+}
 :root {
   --surface-fill: #e7e1d6;
   --surface-fill-hover: #ede7dc;
@@ -26,7 +33,10 @@ input[type="range"] { accent-color: var(--color-action-500); }
 .app {
   position: relative;
   isolation: isolate;
+  width: 100%;
+  max-width: 100%;
   min-height: 100dvh;
+  overflow-x: hidden;
   color: var(--color-text);
   font-family: var(--font-body);
   display: flex;
@@ -148,6 +158,7 @@ button.glass-surface { cursor: pointer; }
   z-index: 50;
   overflow-y: auto;
   display: flex;
+  align-items: flex-start;
   justify-content: center;
   background: color-mix(in srgb, var(--color-bg) 97%, transparent);
   backdrop-filter: blur(20px);
@@ -155,6 +166,8 @@ button.glass-surface { cursor: pointer; }
   animation: fade-in .16s ease;
 }
 .overlay-col { width: 100%; max-width: 430px; padding: 20px 18px 40px; }
+.detail-actions,
+.perfume-form-fields { margin-bottom: max(24px, env(safe-area-inset-bottom)); }
 .scrim { position: fixed; inset: 0; z-index: 70; background: rgb(36 33 30 / 48%); animation: fade-in .16s ease; }
 .nav-slot {
   position: fixed;
@@ -172,6 +185,9 @@ button.glass-surface { cursor: pointer; }
   width: min(calc(100% - 24px), 406px);
   max-height: calc(100dvh - 24px);
   overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior-x: none;
+  touch-action: pan-y;
   transform: translateX(-50%);
   animation: sheet-in .2s ease;
 }
@@ -192,6 +208,7 @@ button.glass-surface { cursor: pointer; }
   gap: 16px;
   margin-bottom: 18px;
 }
+.log-sheet-header > div:first-child { min-width: 0; }
 .log-sheet-header .kicker { margin-bottom: 5px; }
 .log-sheet-title {
   margin: 0;
@@ -199,6 +216,7 @@ button.glass-surface { cursor: pointer; }
   font-size: 21px;
   font-weight: 400;
   line-height: 1.18;
+  overflow-wrap: anywhere;
 }
 .spray-picker {
   display: flex;

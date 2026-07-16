@@ -54,7 +54,7 @@ export default function PerfumeForm({ draftRef, editing, error, onSave, onClose 
           <Button variant="icon" aria-label="Close" onClick={onClose}>✕</Button>
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+        <div className="perfume-form-fields" style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
           <div>
             <label className="lbl">Name *</label>
             <input name="name" className="inp" defaultValue={draft.name} onChange={onField} placeholder="e.g. Lion" />
@@ -81,7 +81,7 @@ export default function PerfumeForm({ draftRef, editing, error, onSave, onClose 
             </div>
             <div>
               <label className="lbl">Price</label>
-              <input name="price" type="number" inputMode="decimal" className="inp" defaultValue={draft.price} onChange={onField} placeholder="$" style={{ paddingInline: 14 }} />
+              <input name="price" type="number" inputMode="decimal" className="inp" defaultValue={draft.price} onChange={onField} placeholder="LKR" style={{ paddingInline: 14 }} />
             </div>
           </div>
 
