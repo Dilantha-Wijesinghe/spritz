@@ -1,0 +1,143 @@
+/* Spritz app chrome — everything visual that isn't a design-system token lives here.
+   Ported from Perfume Tracker.dc.html; colors/radii/shadows come from organic.css tokens. */
+
+html, body { margin: 0; padding: 0; background: var(--color-bg); }
+a { color: var(--color-accent-700); }
+a:hover { color: var(--color-accent-800); }
+input, select, textarea, button { font-family: var(--font-body); }
+input[type="range"] { accent-color: var(--color-accent); }
+
+@keyframes rise { from { transform: translateY(18px); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
+
+/* ── page shell ─────────────────────────────────────────────────────────── */
+.app { min-height: 100dvh; background: var(--color-bg); color: var(--color-text); font-family: var(--font-body); display: flex; justify-content: center; }
+.col { width: 100%; max-width: 430px; position: relative; z-index: 1; padding: 22px 18px 100px 18px; }
+
+.blob { position: fixed; border-radius: 999px; pointer-events: none; }
+.blob-1 { top: -90px; left: calc(50% - 270px); width: 360px; height: 360px; background: var(--color-accent-200); filter: blur(70px); opacity: .55; }
+.blob-2 { bottom: 40px; left: calc(50% + 30px); width: 320px; height: 320px; background: var(--color-accent-2-200); filter: blur(80px); opacity: .5; }
+.blob-3 { top: 40%; left: calc(50% - 340px); width: 260px; height: 260px; background: var(--color-accent-2-100); filter: blur(70px); opacity: .6; }
+
+/* Film grain over the whole page — required by the design. */
+.grain {
+  position: fixed; inset: 0; z-index: 999; pointer-events: none; opacity: .07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+}
+
+/* ── liquid-glass-react integration ─────────────────────────────────────
+   The library centers itself with translate(-50%,-50%) inside a positioned
+   parent, so every instance lives in a .lg-slot that defines its footprint.
+   Its inline styles (box-shadow, font, text-shadow) are retuned to the
+   Organic system with !important overrides. */
+.lg-slot { position: relative; }
+.lg-slot .glass { box-shadow: 0 6px 16px rgba(32, 30, 29, .18) !important; }
+.lg-slot .glass > div { font: inherit !important; text-shadow: none !important; }
+/* Tailwind utilities the library expects but doesn't ship */
+.pointer-events-none { pointer-events: none; }
+.cursor-pointer { cursor: pointer; }
+
+.glass-content {
+  display: flex; align-items: center; justify-content: center;
+  border: none; margin: 0; padding: 0; background: transparent;
+  font-family: var(--font-body); color: var(--color-text); text-shadow: none;
+}
+button.glass-content { cursor: pointer; }
+
+/* frosted white chrome (icon buttons, secondary pills) */
+.gc-chrome {
+  background: linear-gradient(180deg, rgba(255,255,255,.38), rgba(255,255,255,.08) 50%), rgba(255,255,255,.16);
+  border: 1.5px solid rgba(255,255,255,.7);
+  box-shadow: inset 0 1.5px 1px rgba(255,255,255,.8), inset 0 -1.5px 3px rgba(32,30,29,.08);
+  color: var(--color-neutral-800); border-radius: inherit;
+}
+.gc-chrome:hover { background: linear-gradient(180deg, rgba(255,255,255,.45), rgba(255,255,255,.18) 50%), rgba(255,255,255,.28); }
+
+/* terracotta primary */
+.gc-primary {
+  background: linear-gradient(180deg, rgba(255,255,255,.3), rgba(255,255,255,0) 45%), color-mix(in srgb, var(--color-accent-700) 88%, transparent);
+  border: 1.5px solid rgba(255,255,255,.5);
+  box-shadow: inset 0 1.5px 1px rgba(255,255,255,.55), inset 0 -2px 4px rgba(92,42,10,.28);
+  color: #fff; font-weight: 700; border-radius: inherit;
+}
+.gc-primary:hover { background: linear-gradient(180deg, rgba(255,255,255,.36), rgba(255,255,255,.04) 45%), color-mix(in srgb, var(--color-accent-600) 90%, transparent); }
+
+/* sage secondary accent */
+.gc-accent2 {
+  background: linear-gradient(180deg, rgba(255,255,255,.3), rgba(255,255,255,0) 45%), color-mix(in srgb, var(--color-accent-2-700) 85%, transparent);
+  border: 1.5px solid rgba(255,255,255,.5);
+  box-shadow: inset 0 1.5px 1px rgba(255,255,255,.55), inset 0 -2px 4px rgba(35,45,22,.3);
+  color: #fff; font-weight: 700; border-radius: inherit;
+}
+.gc-accent2:hover { background: linear-gradient(180deg, rgba(255,255,255,.36), rgba(255,255,255,.04) 45%), color-mix(in srgb, var(--color-accent-2-600) 88%, transparent); }
+
+/* content cards / list rows */
+.gc-card {
+  background: color-mix(in srgb, var(--color-neutral-100) 55%, transparent);
+  border: 2px solid rgba(255,255,255,.4); border-radius: inherit;
+}
+.gc-row {
+  background: color-mix(in srgb, var(--color-neutral-100) 55%, transparent);
+  border: 2px solid rgba(255,255,255,.35); border-radius: inherit;
+}
+.gc-pick {
+  background: color-mix(in srgb, var(--color-accent-2-100) 60%, transparent);
+  border: 2px solid rgba(255,255,255,.45); border-radius: inherit;
+}
+
+/* bottom tab bar */
+.lg-nav .glass { border-radius: 0 !important; box-shadow: 0 -4px 18px rgba(32,30,29,.1) !important; }
+.gc-nav {
+  background: color-mix(in srgb, var(--color-bg) 68%, transparent);
+  border-top: 2px solid rgba(255,255,255,.4);
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  padding: 8px 6px calc(8px + env(safe-area-inset-bottom));
+}
+
+/* log-a-wear bottom sheet */
+.lg-sheet .glass { border-radius: 24px 24px 0 0 !important; box-shadow: var(--shadow-lg) !important; }
+.gc-sheet {
+  background: color-mix(in srgb, var(--color-bg) 78%, transparent);
+  border: 2px solid rgba(255,255,255,.45); border-bottom: none;
+  border-radius: inherit;
+  display: block; text-align: left;
+  padding: 22px 20px calc(24px + env(safe-area-inset-bottom));
+}
+
+/* ── overlays ───────────────────────────────────────────────────────────── */
+.overlay {
+  position: fixed; inset: 0; z-index: 50; overflow-y: auto;
+  background: color-mix(in srgb, var(--color-bg) 86%, transparent);
+  backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+  display: flex; justify-content: center; animation: fadein .2s ease;
+}
+.overlay-col { width: 100%; max-width: 430px; padding: 20px 18px 40px; animation: rise .25s ease; }
+.scrim { position: fixed; inset: 0; background: rgba(32,30,29,.35); z-index: 70; animation: fadein .2s ease; }
+.nav-slot { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 430px; z-index: 30; }
+.sheet-slot { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 430px; z-index: 71; animation: rise .25s ease; }
+
+/* ── small shared pieces ────────────────────────────────────────────────── */
+.kicker { font-size: 11px; font-weight: 700; letter-spacing: .1em; color: var(--color-neutral-700); text-transform: uppercase; }
+.badge { font-size: 11px; font-weight: 700; border-radius: 999px; padding: 2px 8px; }
+.badge-conc { letter-spacing: .04em; background: var(--color-accent-2-100); color: var(--color-accent-2-800); }
+.badge-low { background: var(--color-accent-100); color: var(--color-accent-800); }
+.badge-empty { background: var(--color-neutral-200); color: var(--color-neutral-700); }
+.muted { color: var(--color-neutral-700); }
+
+.tabbtn { border: none; background: transparent; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 6px 0; }
+.tabbtn span:last-child { font-size: 11px; }
+
+.lbl { display: block; font-size: 12px; font-weight: 700; color: var(--color-neutral-700); margin-bottom: 5px; }
+.inp {
+  width: 100%; border: 2px solid var(--color-neutral-300); border-radius: 999px;
+  padding: 11px 16px; font-size: 14px; background: var(--color-neutral-100); color: var(--color-text);
+}
+select.inp { padding: 11px 12px; }
+textarea.inp { border-radius: var(--radius-md, 14px); resize: vertical; }
+
+.chip { border-radius: 999px; padding: 7px 14px; cursor: pointer; border: 2px solid var(--color-neutral-300); background: transparent; color: var(--color-neutral-700); }
+.chip-on { border-color: var(--color-accent-2-700); background: var(--color-accent-2-700); color: var(--color-accent-2-100); }
+
+.linkbtn { border: none; background: transparent; color: var(--color-accent-700); cursor: pointer; font-size: 13px; font-weight: 700; }
+.linkbtn:hover { color: var(--color-accent-800); }
