@@ -1,6 +1,7 @@
-import { useReducer } from 'react';
+import { useReducer, useRef } from 'react';
 import type { ChangeEvent, MutableRefObject } from 'react';
 import type { Draft, Season } from '../types';
+import Button from './Button';
 import Glass from './Glass';
 
 interface PerfumeFormProps {
@@ -16,6 +17,7 @@ const SEASONS: Season[] = ['spring', 'summer', 'fall', 'winter'];
 /** Uncontrolled form over a mutable draft (the parent remounts it per open via a key). */
 export default function PerfumeForm({ draftRef, editing, error, onSave, onClose }: PerfumeFormProps) {
   const [, force] = useReducer((x: number) => x + 1, 0);
+  const photoInputRef = useRef<HTMLInputElement>(null);
   const draft = draftRef.current;
 
   const onField = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -97,11 +99,12 @@ export default function PerfumeForm({ draftRef, editing, error, onSave, onClose 
               {SEASONS.map(s => {
                 const on = (draft.seasons || []).includes(s);
                 return (
-                  <button
+                  <Button
                     key={s}
-                    type="button"
-                    className={`chip ${on ? 'chip-on' : ''}`}
-                    style={{ fontSize: 13, fontWeight: 700 }}
+                    variant="chip"
+                    size="sm"
+                    active={on}
+                    aria-pressed={on}
                     onClick={() => {
                       const ss = draft.seasons || [];
                       draft.seasons = on ? ss.filter(x => x !== s) : [...ss, s];
@@ -109,7 +112,7 @@ export default function PerfumeForm({ draftRef, editing, error, onSave, onClose 
                     }}
                   >
                     {s}
-                  </button>
+                  </Button>
                 );
               })}
             </div>
@@ -138,12 +141,26 @@ export default function PerfumeForm({ draftRef, editing, error, onSave, onClose 
               {draft.photo && (
                 <div className="washed" style={{ width: 56, height: 56, borderRadius: 999, flex: 'none', backgroundImage: `url('${draft.photo}')`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
               )}
-              <label className="gc-chrome" style={{ fontWeight: 700, fontSize: 13, borderRadius: 999, padding: '10px 16px', cursor: 'pointer', backdropFilter: 'blur(4px) saturate(1.5)', boxShadow: '0 4px 12px rgba(32,30,29,.12), inset 0 1.5px 1px rgba(255,255,255,.8), inset 0 -1.5px 3px rgba(32,30,29,.08)' }}>
+              <Button
+                variant="secondary"
+                onClick={() => {
+                  if (photoInputRef.current) {
+                    photoInputRef.current.value = '';
+                    photoInputRef.current.click();
+                  }
+                }}
+              >
                 Choose photo
-                <input type="file" accept="image/*" onChange={pickPhoto} style={{ display: 'none' }} />
-              </label>
+              </Button>
+              <input ref={photoInputRef} type="file" accept="image/*" onChange={pickPhoto} style={{ display: 'none' }} />
               {draft.photo && (
-                <button type="button" className="linkbtn" onClick={() => { draft.photo = null; force(); }}>remove</button>
+                <Button
+                  variant="danger"
+                  size="sm"
+                  onClick={() => { draft.photo = null; force(); }}
+                >
+                  Remove
+                </Button>
               )}
             </div>
           </div>
@@ -152,9 +169,9 @@ export default function PerfumeForm({ draftRef, editing, error, onSave, onClose 
             <div style={{ background: 'var(--color-accent-100)', color: 'var(--color-accent-900)', borderRadius: 'var(--radius-md, 14px)', padding: '11px 14px', fontSize: 13 }}>{error}</div>
           )}
 
-          <Glass variant="primary" onClick={onSave} style={{ marginTop: 4 }} contentStyle={{ height: 51, fontSize: 15 }}>
+          <Button variant="primary" size="lg" block onClick={onSave} style={{ marginTop: 4 }}>
             {editing ? 'Save changes' : 'Add to shelf'}
-          </Glass>
+          </Button>
         </div>
       </div>
     </div>

@@ -1,5 +1,6 @@
 import { remaining } from '../lib/perfume';
 import type { Perfume, Wear } from '../types';
+import Button from './Button';
 import Glass from './Glass';
 
 interface LogSheetProps {
@@ -15,8 +16,6 @@ interface LogSheetProps {
 
 export default function LogSheet({ perfume, wears, sprays, date, onSprays, onDate, onSave, onClose }: LogSheetProps) {
   const after = Math.max(0, remaining(perfume, wears) - sprays);
-  const stepperProps = { variant: 'chrome' as const, style: { width: 52, flex: 'none' as const }, contentStyle: { height: 52, fontSize: 22 } };
-
   return (
     <>
       <div className="scrim" onClick={onClose} />
@@ -28,12 +27,12 @@ export default function LogSheet({ perfume, wears, sprays, date, onSprays, onDat
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 20, marginBottom: 14 }}>
-            <Glass {...stepperProps} label="Fewer sprays" onClick={() => onSprays(Math.max(1, sprays - 1))}>−</Glass>
+            <Button variant="stepper" size="lg" aria-label="Fewer sprays" onClick={() => onSprays(Math.max(1, sprays - 1))}>−</Button>
             <div style={{ textAlign: 'center', minWidth: 80 }}>
               <div style={{ fontFamily: 'var(--font-heading)', fontSize: 40, lineHeight: 1 }}>{sprays}</div>
               <div className="muted" style={{ fontSize: 12 }}>sprays</div>
             </div>
-            <Glass {...stepperProps} label="More sprays" onClick={() => onSprays(Math.min(20, sprays + 1))}>+</Glass>
+            <Button variant="stepper" size="lg" aria-label="More sprays" onClick={() => onSprays(Math.min(20, sprays + 1))}>+</Button>
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
@@ -45,7 +44,7 @@ export default function LogSheet({ perfume, wears, sprays, date, onSprays, onDat
             ≈ {after} sprays will remain
           </div>
 
-          <Glass variant="primary" onClick={onSave} contentStyle={{ height: 51, fontSize: 15 }}>Save</Glass>
+          <Button variant="primary" size="lg" block onClick={onSave}>Save</Button>
         </div>
       </Glass>
     </>

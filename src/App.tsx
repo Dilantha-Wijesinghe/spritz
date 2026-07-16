@@ -196,7 +196,9 @@ export default function App() {
           />
         )}
 
-        <TabBar tab={tab} onSelect={t => { setTab(t); setDaySel(null); }} />
+        {!detail && !formOpen && !logPerfume && (
+          <TabBar tab={tab} onSelect={t => { setTab(t); setDaySel(null); }} />
+        )}
 
         {detail && (
           <DetailOverlay

@@ -2,6 +2,7 @@ import { capacity, emptyEstimate, lastWorn, money, percentLeft, remaining } from
 import { fmtDate } from '../lib/dates';
 import type { Perfume, Wear } from '../types';
 import BottleGlyph from './BottleGlyph';
+import Button from './Button';
 import Glass from './Glass';
 
 interface DetailOverlayProps {
@@ -35,8 +36,8 @@ export default function DetailOverlay({ perfume: p, wears, onClose, onWear, onEd
   return (
     <div className="overlay" role="dialog" aria-label="Perfume detail">
       <div className="overlay-col">
-        <Glass variant="chrome" onClick={onClose} style={{ width: 96, marginBottom: 18 }} contentStyle={{ height: 36, fontSize: 13, fontWeight: 700 }}>
-          ← Shelf
+        <Glass variant="chrome" label="Back to shelf" onClick={onClose} style={{ width: 40, marginBottom: 18 }} contentStyle={{ height: 40, fontSize: 19 }}>
+          ←
         </Glass>
 
         <div style={{ display: 'flex', gap: 18, alignItems: 'center', marginBottom: 16 }}>
@@ -78,9 +79,16 @@ export default function DetailOverlay({ perfume: p, wears, onClose, onWear, onEd
         {p.desc && <p className="muted" style={{ fontSize: 14, lineHeight: 1.6, margin: '0 0 22px' }}>{p.desc}</p>}
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-          <Glass variant="primary" onClick={onWear} contentStyle={{ height: 49, fontSize: 15 }}>Log a wear</Glass>
-          <Glass variant="chrome" onClick={onEdit} contentStyle={{ height: 45, fontSize: 14, fontWeight: 700 }}>Edit details</Glass>
-          <button type="button" className="linkbtn" onClick={onDelete} style={{ padding: 10 }}>Remove from shelf</button>
+          <Button variant="primary" size="lg" block onClick={onWear}>Log a wear</Button>
+          <Button variant="secondary" size="lg" block onClick={onEdit}>Edit details</Button>
+          <Button
+            variant="danger"
+            size="sm"
+            onClick={onDelete}
+            style={{ alignSelf: 'center' }}
+          >
+            Remove from shelf
+          </Button>
         </div>
       </div>
     </div>

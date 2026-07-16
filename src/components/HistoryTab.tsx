@@ -1,5 +1,6 @@
 import { fmtDate, todayIso } from '../lib/dates';
 import type { Perfume, Wear } from '../types';
+import Button from './Button';
 import Glass from './Glass';
 
 interface HistoryTabProps {
@@ -63,22 +64,21 @@ export default function HistoryTab({ perfumes, wears, calOff, daySel, onCalOff, 
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7,1fr)', gap: 4 }}>
-        {cells.map(c => (
-          <div
+        {cells.map(c => c.iso ? (
+          <Button
             key={c.key}
-            onClick={() => c.iso && onDaySel(c.sel ? null : c.iso)}
-            style={{
-              height: 46, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-              borderRadius: 999, cursor: c.iso ? 'pointer' : 'default',
-              background: c.sel ? 'var(--color-accent)' : c.worn ? 'var(--color-accent-200)' : 'transparent',
-              color: c.sel ? 'var(--color-accent-100)' : 'var(--color-text)',
-              border: c.isToday && !c.sel ? '2px solid var(--color-accent)' : '2px solid transparent',
-            }}
+            variant="day"
+            active={c.sel}
+            aria-pressed={c.sel}
+            aria-current={c.isToday ? 'date' : undefined}
+            aria-label={`${c.iso}${c.worn ? ', perfume worn' : ''}`}
+            onClick={() => onDaySel(c.sel ? null : c.iso!)}
+            className={`${c.isToday && !c.sel ? 'is-today' : ''} ${c.worn ? 'is-worn' : ''}`}
           >
             <span style={{ fontSize: 14 }}>{c.n}</span>
-            {c.worn && !c.sel && <span style={{ width: 5, height: 5, borderRadius: 99, background: 'var(--color-accent-700)', display: 'block', marginTop: 2 }} />}
-          </div>
-        ))}
+            {c.worn && !c.sel && <span className="day-dot" />}
+          </Button>
+        ) : <div key={c.key} aria-hidden="true" />)}
       </div>
 
       {daySel && (
@@ -90,7 +90,16 @@ export default function HistoryTab({ perfumes, wears, calOff, daySel, onCalOff, 
                 <Glass key={w.id} as="div" variant="row" corner={14} blurAmount={0.25} displacementScale={20} contentStyle={{ padding: '11px 14px', gap: 10, justifyContent: 'flex-start' }}>
                   <span style={{ fontSize: 14, flex: 1, minWidth: 0, textAlign: 'left' }}>{pname(w.pid)}</span>
                   <span className="muted" style={{ fontSize: 12 }}>{w.sprays} sprays</span>
-                  <button type="button" title="Remove entry" onClick={() => onDeleteWear(w)} className="linkbtn" style={{ color: 'var(--color-neutral-700)', fontSize: 15, padding: '2px 6px' }}>✕</button>
+                  <Button
+                    variant="danger"
+                    size="sm"
+                    title="Remove entry"
+                    aria-label="Remove entry"
+                    onClick={() => onDeleteWear(w)}
+                    className="button-icon-danger"
+                  >
+                    ✕
+                  </Button>
                 </Glass>
               ))}
             </div>
