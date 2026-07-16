@@ -2,6 +2,7 @@ import { LOW_PCT } from '../config';
 import { capacity, emptyEstimate, isEmpty, isLow, percentLeft, remaining } from '../lib/perfume';
 import type { Perfume, Wear } from '../types';
 import BottleGlyph from './BottleGlyph';
+import Button from './Button';
 import Glass from './Glass';
 
 interface ShelfTabProps {
@@ -50,14 +51,14 @@ export default function ShelfTab({ perfumes, wears, loaded, onOpen, onLog, onAdd
                   {rem} of {cap} sprays left{est ? ` · empty ~${est}` : ''}
                 </div>
               </div>
-              <Glass
-                variant="primary"
+              <Button
+                variant="neo-secondary"
+                size="sm"
                 onClick={e => { e.stopPropagation(); onLog(p.id); }}
                 style={{ width: 76, flex: 'none' }}
-                contentStyle={{ height: 38, fontSize: 13 }}
               >
                 Spritz
-              </Glass>
+              </Button>
             </Glass>
           );
         })}
@@ -68,9 +69,9 @@ export default function ShelfTab({ perfumes, wears, loaded, onOpen, onLog, onAdd
           <div style={{ fontSize: 14 }}>Add your first bottle below and start logging your sprays.</div>
         </div>
       )}
-      <Glass variant="primary" onClick={onAdd} className="" style={{ marginTop: 16 }} contentStyle={{ height: 51, fontSize: 15 }}>
+      <Button variant="neo-primary" size="lg" block onClick={onAdd} style={{ marginTop: 16 }}>
         + Add a perfume
-      </Glass>
+      </Button>
     </section>
   );
 }

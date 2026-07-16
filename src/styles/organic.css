@@ -7,6 +7,15 @@
   --color-text: #201e1d;
   --color-accent: #c67139;
   --color-accent-2: #7a8a5e;
+  --color-action-100: #e7f3ef;
+  --color-action-200: #d8ece5;
+  --color-action-500: #34766a;
+  --color-action-600: #2f6f64;
+  --color-action-700: #264f48;
+  --color-action-900: #193632;
+  --color-danger-100: #fbecef;
+  --color-danger-600: #a33f54;
+  --color-danger-700: #8f3147;
   --color-divider: color-mix(in srgb, #201e1d 16%, transparent);
 
   /* Tonal ramps — generated in OKLCH on one shared lightness scale, so the
@@ -101,7 +110,7 @@ figcaption {
 }
 .text-muted { color: color-mix(in srgb, var(--color-text) 55%, transparent); }
 :focus { outline: none; }
-:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+:focus-visible { outline: 2px solid var(--color-action-500); outline-offset: 2px; }
 ::selection { background: color-mix(in srgb, var(--color-accent) 30%, transparent); }
 
 /* — rules — */

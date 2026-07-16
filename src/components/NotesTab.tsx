@@ -1,4 +1,5 @@
 import type { NoteLayer, Perfume } from '../types';
+import Button from './Button';
 import Glass from './Glass';
 
 interface NotesTabProps {
@@ -40,20 +41,19 @@ export default function NotesTab({ perfumes, noteFilter, onFilter, onOpen }: Not
         {chips.map(n => {
           const active = noteFilter === n;
           return (
-            <button
+            <Button
               key={n}
-              type="button"
+              variant="chip"
+              size="sm"
+              active={active}
+              aria-pressed={active}
               onClick={() => onFilter(active ? null : n)}
               style={{
-                border: `2px solid ${active ? 'var(--color-accent-2-700)' : 'var(--color-neutral-300)'}`,
-                background: active ? 'var(--color-accent-2-700)' : 'var(--color-neutral-100)',
-                color: active ? 'var(--color-accent-2-100)' : 'var(--color-neutral-800)',
-                borderRadius: 999, padding: '7px 14px', cursor: 'pointer',
                 fontSize: 12 + Math.min(noteMap[n].count, 4) * 1.5,
               }}
             >
               {n}
-            </button>
+            </Button>
           );
         })}
       </div>
@@ -62,7 +62,13 @@ export default function NotesTab({ perfumes, noteFilter, onFilter, onOpen }: Not
         <div style={{ marginTop: 20 }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
             <div className="kicker">Wearing {noteFilter}</div>
-            <button type="button" className="linkbtn" onClick={() => onFilter(null)}>clear</button>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => onFilter(null)}
+            >
+              Clear
+            </Button>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
             {matches.map(({ p, layers }) => (

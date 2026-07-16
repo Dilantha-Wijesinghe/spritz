@@ -2,7 +2,7 @@ import { useLayoutEffect, useRef, useState } from 'react';
 import type { CSSProperties, MouseEvent, ReactNode } from 'react';
 import LiquidGlass from 'liquid-glass-react';
 
-type Variant = 'chrome' | 'primary' | 'accent2' | 'card' | 'row' | 'pick' | 'nav' | 'sheet';
+type Variant = 'chrome' | 'card' | 'row' | 'pick' | 'nav' | 'sheet';
 
 interface GlassProps {
   /** Render the content node as a real <button> (default) or a <div>. */
@@ -63,7 +63,9 @@ export default function Glass({
 
   useLayoutEffect(() => {
     if (!innerEl) return;
-    const measure = () => setH(innerEl.offsetHeight);
+    const measure = () => {
+      setH(innerEl.offsetHeight);
+    };
     measure();
     const ro = new ResizeObserver(measure);
     ro.observe(innerEl);
@@ -72,7 +74,11 @@ export default function Glass({
 
   const Inner = as;
   return (
-    <div ref={slotRef} className={`lg-slot lg-${variant} ${className}`} style={{ height: h || undefined, ...style }}>
+    <div
+      ref={slotRef}
+      className={`lg-slot lg-${variant} ${className}`}
+      style={{ height: h || undefined, ...style }}
+    >
       {w > 0 && (
         <LiquidGlass
           style={{ position: 'absolute', top: '50%', left: '50%' }}

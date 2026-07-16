@@ -1,5 +1,6 @@
 import type { JSX } from 'react';
 import type { Tab } from '../types';
+import Button from './Button';
 import Glass from './Glass';
 
 const ICONS: Record<Tab, JSX.Element> = {
@@ -40,19 +41,24 @@ interface TabBarProps {
 }
 
 export default function TabBar({ tab, onSelect }: TabBarProps) {
+  const activeIndex = TABS.findIndex(([id]) => id === tab);
+
   return (
-    <Glass as="div" variant="nav" corner={0} className="nav-slot" blurAmount={0.45} displacementScale={22} aberrationIntensity={1}>
+    <Glass as="div" variant="nav" corner={24} className="nav-slot" blurAmount={0.45} displacementScale={22} aberrationIntensity={1}>
+      <span className="tab-indicator" aria-hidden="true" style={{ transform: `translateX(${activeIndex * 100}%)` }} />
       {TABS.map(([id, tabLabel]) => (
-        <button
+        <Button
           key={id}
-          type="button"
-          className="tabbtn"
+          variant="tab"
+          active={tab === id}
+          aria-current={tab === id ? 'page' : undefined}
+          aria-label={`${tabLabel} tab`}
           onClick={() => onSelect(id)}
-          style={{ color: tab === id ? 'var(--color-accent-700)' : 'var(--color-neutral-600)', fontWeight: tab === id ? 700 : 400 }}
+          className="tabbtn"
         >
           <span style={{ display: 'flex' }}>{ICONS[id]}</span>
           <span>{tabLabel}</span>
-        </button>
+        </Button>
       ))}
     </Glass>
   );

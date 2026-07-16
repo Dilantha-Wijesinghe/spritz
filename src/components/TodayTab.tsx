@@ -3,6 +3,7 @@ import { fmtDate } from '../lib/dates';
 import { emptyEstimate, percentLeft, remaining, todaysPick } from '../lib/perfume';
 import type { Perfume, Wear } from '../types';
 import BottleGlyph from './BottleGlyph';
+import Button from './Button';
 import Glass from './Glass';
 
 interface TodayTabProps {
@@ -52,9 +53,9 @@ export default function TodayTab({ perfumes, wears, onLog }: TodayTabProps) {
             </div>
           </div>
           <p style={{ fontSize: 14, lineHeight: 1.5, margin: '14px 0', color: 'var(--color-accent-2-900)' }}>{pick.reason}</p>
-          <Glass variant="accent2" onClick={() => onLog(pick.perfume.id)} style={{ width: 170 }} contentStyle={{ height: 45, fontSize: 14 }}>
+          <Button variant="primary" onClick={() => onLog(pick.perfume.id)} style={{ width: 170 }}>
             Wear this today
-          </Glass>
+          </Button>
         </Glass>
       )}
 
