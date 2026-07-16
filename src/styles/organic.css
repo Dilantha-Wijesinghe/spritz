@@ -15,9 +15,9 @@
 }
 
 :root {
-  --color-bg: #e0e0e0;
-  --color-surface: #e0e0e0;
-  --color-text: #201e1d;
+  --color-bg: #e7e1d6;
+  --color-surface: #e7e1d6;
+  --color-text: #24211e;
   --color-accent: #c67139;
   --color-accent-2: #7a8a5e;
   --color-action-100: #e7f3ef;
@@ -29,19 +29,19 @@
   --color-danger-100: #fbecef;
   --color-danger-600: #a33f54;
   --color-danger-700: #8f3147;
-  --color-divider: color-mix(in srgb, #201e1d 16%, transparent);
+  --color-divider: color-mix(in srgb, #24211e 16%, transparent);
 
   /* Tonal ramps — generated in OKLCH on one shared lightness scale, so the
      same step of any role matches the others in visual value. */
-  --color-neutral-100: #f2f2f2;
-  --color-neutral-200: #d0d0d0;
-  --color-neutral-300: #b8b8b8;
-  --color-neutral-400: #9f9f9f;
-  --color-neutral-500: #858585;
-  --color-neutral-600: #6d6d6d;
-  --color-neutral-700: #555555;
-  --color-neutral-800: #3d3d3d;
-  --color-neutral-900: #292929;
+  --color-neutral-100: #f6f1e8;
+  --color-neutral-200: #d7d0c4;
+  --color-neutral-300: #bdb6aa;
+  --color-neutral-400: #a39c92;
+  --color-neutral-500: #89847c;
+  --color-neutral-600: #716c65;
+  --color-neutral-700: #59554f;
+  --color-neutral-800: #413e39;
+  --color-neutral-900: #2c2a27;
 
   --color-accent-100: #fff2eb;
   --color-accent-200: #ffe1d0;
